@@ -7,31 +7,28 @@ def caesar_cipher string, shift_number
       i = 0
       while (i < letters.length)
         if(s == letters[i])
-          total_shift = shift_number + i
-          if(total_shift > letters.length - 1)
-            total_shift = decrease_shift total_shift
-          end
-          new_string += letters[total_shift]
+          index = shift_index i,shift_number
+          new_string += letters[index]
         elsif(s == letters[i].downcase)
-          total_shift = shift_number + i
-          if(i + shift_number > letters.length - 1)
-            total_shift = decrease_shift total_shift
-          end
-          new_string += letters[total_shift].downcase
+          index = shift_index i,shift_number
+          new_string += letters[index].downcase
         end
        i = i + 1
       end
+
     else
       new_string += s
     end
   end
   new_string
 end
-def decrease_shift number
-  while(number > 25)
-    number = number - 25
+
+def shift_index index, shift_number
+  total_shift = index + shift_number
+  while total_shift >= 26
+    total_shift = total_shift - 26
   end
-number
+  total_shift
 end
-puts ' '
-caesar_cipher "What a string!", 5
+
+
